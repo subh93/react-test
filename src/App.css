@@ -1,38 +1,42 @@
-.App {
-  text-align: center;
+*{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+h3{ margin : 1vmax 0; }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.layout-details{
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: space-between;
+  /* align-content: flex-start; */
+  flex-wrap:wrap;
+  font-size:large;
+}
+
+label{
+  display:inline-block;
+  margin-right: 0.5vmax;
+}
+
+.layout-details > div{
+  flex:0 0 33%;
+  /* border: 0.1vmax solid black; */
+}
+
+.layout-details > .flexgrow{
+  flex-grow: 1;
+}
+
+.layout-details > div:last-child > label[for="govt"], .layout-details > div:last-child > label[for="pincode"], .layout-details > div:last-child > label[for="nationality"]{ margin-left:0.5vmax; } /*for is same as htmlFor*/
+
+.buttonposition{
+  display:flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.buttonposition > button{
+  margin:2vmax;
+  width: 10%;
+  aspect-ratio: 4/1;
 }
