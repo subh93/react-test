@@ -40,3 +40,19 @@ label{
   width: 10%;
   aspect-ratio: 4/1;
 }
+
+.displaydata{
+  padding : 0 auto;
+  font-size: small;
+}
+
+th,td{
+  border: 0.01vmax solid black;
+  padding: 0 0.5vmax;
+}
+
+th{ background-color: aqua; }
+
+td:nth-child(2n+1){ background-color: antiquewhite; }
+
+td:nth-child(2n){ background-color: blanchedalmond; }

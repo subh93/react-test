@@ -1,7 +1,9 @@
 import { Formik, Field, Form } from 'formik';
 import './App.css';
+import { useState } from 'react';
 
 function App() {
+  const [users, setSubmit] = useState([]);
   return (
     <div className="App">
       <Formik
@@ -19,18 +21,24 @@ function App() {
           address: '',
           state: '',
           city: '',
-          country: '',
+          country: 'India',
           pincode: '',
           occupation: '',
           religion: '',
           marital_status: '',
           blood_group: '',
-          nationality: ''
+          nationality: 'Indian'
+        }}
+
+        onSubmit={(values, {resetForm})=>{
+          const newUser = [values]
+          setSubmit([...users, ...newUser]);
+          resetForm({ values: '' })
         }}
       >
         <Form>
           <h3>Personal Details</h3>
-          <div class="layout-details">
+          <div className="layout-details">
             <div>
               <label htmlFor="name">Name</label>
               <Field id="name" name="name" placeholder="Enter the name" />
@@ -47,8 +55,6 @@ function App() {
                 <option value="">Enter Sex</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
-                {/* <option value="product">Product Manager</option>
-             <option value="other">Other</option> */}
               </Field>
             </div>
 
@@ -57,7 +63,7 @@ function App() {
               <Field id="mobile_no" name="mobile_no" placeholder="Enter Mobile" />
             </div>
 
-            <div class="flexgrow">
+            <div className="flexgrow">
               <label htmlFor="govt">Govt Issued ID</label>
               <Field name="gov_type" component="select">
                 <option value="">ID Type</option>
@@ -70,7 +76,7 @@ function App() {
             </div>
           </div>
           <h3>Contact Details</h3>
-          <div class="layout-details">
+          <div className="layout-details">
           <div>
               <label htmlFor="guardian">Guardian Details</label>
               <Field name="guardian_details1" component="select">
@@ -79,12 +85,12 @@ function App() {
                 <option value="Ms.">Ms.</option>
                 <option value="Mrs.">Mrs.</option>
               </Field>
-              <Field id="guardian_details1" name="guardian_details1" placeholder="Enter Guardian Name" />
+              <Field id="guardian_details2" name="guardian_details2" placeholder="Enter Guardian Name" />
           </div>
 
           <div>
               <label htmlFor="email">Email</label>
-              <Field id="email" name="email" placeholder="Enter Email" type="email"/>
+              <Field id="email" name="email" placeholder="Enter Email" type="email" />
             </div>
 
             <div>
@@ -94,7 +100,7 @@ function App() {
           </div>
 
           <h3>Address Details</h3>
-          <div class="layout-details">
+          <div className="layout-details">
             <div>
               <label htmlFor="address">Address</label>
               <Field id="address" name="address" placeholder="Enter the Address" />
@@ -112,17 +118,17 @@ function App() {
 
             <div>
               <label htmlFor="country">Country</label>
-              <Field id="country" name="country" value="India" />
+              <Field id="country" name="country" placeholder="India"/>
             </div>
 
-            <div class="flexgrow">
+            <div className="flexgrow">
               <label htmlFor="pincode">Pin Code</label>
               <Field id="pincode" name="pincode" placeholder="Enter pincode" />
             </div>
           </div>
 
           <h3>Other Details</h3>
-          <div class="layout-details">
+          <div className="layout-details">
             <div>
               <label htmlFor="occupation">Occupation</label>
               <Field id="occupation" name="occupation" placeholder="Enter the Occupation" />
@@ -166,18 +172,60 @@ function App() {
               </Field>
             </div>
 
-            <div class="flexgrow">
+            <div className="flexgrow">
               <label htmlFor="nationality">Nationality</label>
-              <Field id="nationality" name="nationality" value="Indian" />
+              <Field id="nationality" name="nationality" placeholder="Indian"/>
             </div>
           </div>
+          <div className="buttonposition">
+          <button type="submit">Submit</button>
+          <button type="reset">Clear</button>
+        </div>
         </Form>
       </Formik>
-      <div class="buttonposition">
-        <button type="submit">Submit</button>
-        <button>Cancel</button>
+      <div className="displaydata">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>DOB/Age</th>
+              <th>Sex</th>
+              <th>Mobile No</th>
+              <th>Government Type & ID</th>
+              <th>Guardian Details</th>
+              <th>Email</th>
+              <th>Emergency Contact</th>
+              <th>Address</th>
+              <th>Occupation</th>
+              <th>Religion</th>
+              <th>Marital Status</th>
+              <th>Blood Group</th>
+              <th>Nationality</th>
+            </tr>
+          </thead>
+          <tbody>
+          {users.map((user, index) => (
+            <tr key={user.index}>
+              <td>{user.name}</td>
+              <td>{user.dob_age}</td>
+              <td>{user.sex}</td>
+              <td>{user.mobile_no}</td>
+              <td>{user.gov_type} {user.gov_ID}</td>
+              <td>{user.guardian_details1} {user.guardian_details2}</td>
+              <td>{user.email}</td>
+              <td>{user.emergency_contact}</td>
+              <td>{user.address},{user.city},{user.state},{user.country},{user.pincode}</td>
+              <td>{user.occupation}</td>
+              <td>{user.religion}</td>
+              <td>{user.marital_status}</td>
+              <td>{user.blood_group}</td>
+              <td>{user.nationality}</td>
+            </tr>
+          ))}
+          </tbody>
+        </table>
       </div>
-    </div>
+      </div>
   );
 }
 
